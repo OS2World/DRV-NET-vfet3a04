@@ -1,0 +1,232 @@
+[VFET3A]
+Type = NDIS
+Title = "VIA VT6105 Rhine3 Another MAC driver"
+Version = 2.01
+DriverName = VFET3A$
+Xports = NETBEUI, LANDD
+
+[FILE]
+Name = VFET3A.OS2
+Path = IBMCOM\MACS
+
+
+[SLOT]
+display = "Slot Number of the Adapter"
+type = decimal
+;default = "0"
+optional = yes
+range = 0-7
+help = "SLOT=n, n=0..7 specifies the PCI SLOT index number 
+to look for the adapter. PCI SLOT index starts 0. Default is 0. 
+This isn't required unless there are multiple adapters."
+
+
+[TXQUEUE]
+display = "Maximum TX queue count"
+type = decimal
+;default = 24
+optional = yes
+range = 8-83
+help = "TXQUEUE=n, n=8..83, specifies the number of transmits 
+which can be queued up by the driver. The default value is 24."
+
+
+[RXQUEUE]
+display = "Maximum RX queue count"
+type = decimal
+;default = 32
+optional = yes
+range = 24-83
+;step = 4
+help = "RXQUEUE=n, n=24..83, specifies the number of recieves 
+which can be queued up by the driver. The default value is 32."
+
+
+[TXEARLY]
+display = "Early Transmit Start"
+type = decimal
+;default = 1024
+optional = yes
+set = 0,128,256,512,1024
+help = "TXEARLY=n, specifies the amount copied into FIFO in byte 
+that the transmit action can be started. The value 0 means that 
+transmit works in the Store and Foward basis. 
+The default value is 1024."
+
+
+[RXEARLY]
+display = "Early Receive Start"
+type = decimal
+;default = 256
+optional = yes
+set = 0,32,64,128,256,512,768,1024
+help = "RXEARLY=n, specifies the amount copied into FIFO in byte 
+that the receive DMA can be started. The value 0 means Store and Foward. 
+The default value is 256."
+
+
+[MXDMA]
+display = "Maximum DMA Burst Length"
+type = decimal
+;default = 64
+optional = yes
+set = 0,32,64,128,256,512,1024
+help = "MXDMA=n, specifies the maximum size in byte of DMA bursts. 
+The value 0 means unlimited. The default value is 64."
+
+
+[TXARB]
+display = "PCI Bus Transimit Arbiter Priority"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "TXARB=str, specifies the MAC PCI logic gives higher priority 
+to Transmit PCI DMA after 32 dwords Receive DMA. The default string is NO."
+
+
+[RXARB]
+display = "PCI Bus Receive Arbiter Priority"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "RXARB=str, specifies the MAC PCI logic gives higher priority 
+to Receive PCI DMA after 32 dwords Transmit DMA. The default string is NO."
+
+
+[DAPOLL]
+display = "Descriptor Auto Polling enable"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "DAPOLL=str, specifies the MAC can check transmit and receive 
+descriptors automatically. The default string is NO."
+
+
+[POLLTMR]
+display = "Polling Time Inverval"
+type = decimal
+;default = 6
+optional = yes
+range = 0-7
+help = "POLLTMR=n, n=0..7, (may) specify the descriptors polling time 
+interval. The time resolution is unknown. 
+The default value is 6."
+
+
+[FLLO]
+display = "Flow Control Low threshold"
+type = decimal
+;default = 4
+optional = yes
+set = 4,8,16,24
+help = "FLLO=n, specifies the thresold of the residue receive descriptor 
+to send the MAC Control Pause Frame Length -1. The default value is 4."
+
+
+[FLHI]
+display = "Flow Control High threshold"
+type = decimal
+;default = 24
+optional = yes
+set = 24,32,48,64
+help = "FLLO=n, specifies the thresold of the residue receive descriptor 
+to send the MAC Control Pause Frame Length 0. The default value is 24."
+
+
+[PCIMRL]
+display = "PCI Memory Read Cache Line enable"
+type = string
+strlength = 4
+;default = YES
+optional = yes
+set = YES,NO
+help = "PCIMRL=str, specifies that the MAC PCI logic can use Memory 
+Read Cache Line command. The default string is YES."
+
+
+[PCIMRW]
+display = "PCI Memory Read Insert one wait"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "PCIMRW=str, specifies that the MAC PCI logic inserts one clock 
+cycle wait to read memories. The default string is NO."
+
+
+[PCIMWW]
+display = "PCI Memory Write Insert one wait"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "PCIMWW=str, specifies that the MAC PCI logic inserts one clock 
+cycle wait to write memories. The default string is NO."
+
+
+[PCILAT]
+display = "PCI Latency Timer circuit enable"
+type = string
+strlength = 4
+;default = YES
+optional = yes
+set = YES,NO
+help = "PCIMRW=str, specifies the PCI Latency Timer circuit enable.
+The default string is YES."
+
+
+;[MAXFRAME]
+;display = "Maximum Frame size"
+;type = decimal
+;default = 1514
+;optional = yes
+;range = 1514-2014
+;step = 500
+;help = "MAXFRAME=n, n=1514 or 9014, specifies the maximum frame size 
+;which can be transmitted or received by the driver. The conventional 
+;Ethernet MTU is 1500. The Jumbo Packet MTU is 9000. The default value is 1514."
+
+
+;[NETADDRESS]
+;tag = NETADDRESS
+;display = "Network adapter address"
+;type = hexstring
+;strlength = 12
+;optional = yes
+;editable = yes
+;help = "NETADDRESS alternates the MAC address of the adapter 
+;with the one fixed in the hardware(in the EEPROM)."
+
+
+[OPENBIND]
+display = "Open adapter in bind process"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "OPENBIND=str, specifies the adapter state just after the bind 
+process is done successfully. If YES is specified, the adapter is 
+in the open state. The default string is NO."
+
+
+[IRQ15OVR]
+display = "Accept IRQ level > 15"
+type = string
+strlength = 4
+;default = NO
+optional = yes
+set = YES,NO
+help = "IRQ15OVR=str, specifies that the range of the acceptable 
+IRQ level is either [0..15] or [0..255]. If YES is specified, 
+the range is [0..255](no range check). The default string is NO."
+
+
